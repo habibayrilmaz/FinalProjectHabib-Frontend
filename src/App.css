@@ -2,10 +2,186 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.photo {
+  height: 300px;
+  width: 1800px; 
 }
+
+
+.date {
+position: absolute;
+height: 50px !important;
+width: 900px;
+padding-left: 12px;
+}
+
+.flex-col{
+  height: 100px;
+
+}
+
+.arka {
+  /* background-image: url("https://bobbyhadz.com/images/blog/react-usestate-dynamic-key/thumbnail.webp"); */
+
+  height: 400px;
+  width: 1800px;
+  position:relative ;
+
+}
+
+.css-11pcttb-MuiTypography-root {
+  margin: 0;
+  margin-bottom: 0.35em;
+  color:darkred;
+}
+
+/* .arkaKomple{
+  min-height: 100%;
+  min-width: 1024px;
+  position: fixed; */
+
+  /* Set up proportionate scaling */
+  /* width: auto;
+  height: auto; */
+
+  /* Set up positioning */
+  /* top: 0;
+  left: 0;} */
+
+
+.card1 {
+  
+  position: absolute;
+  padding-left: 1435px;
+  padding-bottom: 120px;
+  top: 100px;
+  text-align: left;
+}
+.card2 {
+  position: absolute;
+  padding-left: 1045px;
+  padding-bottom: 120px;
+  top: 100px;
+  text-align: left;
+
+}
+.card3 {
+  position: absolute;
+  padding-left: 655px;
+  padding-bottom: 120px;
+  top: 100px;
+  text-align: left;
+
+}
+.card4 {
+  position: absolute;
+  padding-left: 265px;
+  padding-bottom: 120px;
+  top: 100px;
+  text-align: left;
+
+}
+
+.basLogo {
+  background-color: black;
+  max-width:250px;
+}
+
+.test5 {
+  align-items: flex-end;
+}
+
+.userveri {
+  
+  padding:0%;
+  width: 1480px;
+  height: 545px;
+  margin: -145px 1009px 50px -65px;
+  color: #61dafb;
+  position:absolute;
+  text-align: start;
+}
+
+.ilans{
+  
+  margin-top: -190px;
+  margin-left: 100px;
+  position:relative;
+}
+
+
+.advertButton{
+  text-align:center;
+  margin-top: 40ch;
+  
+}
+
+.boxmodal{
+  text-align: center;
+  margin-top: 12px;
+
+}
+
+.userveri2 {
+  padding:0%;
+  width: 1480px;
+  margin: 800px 1000px 50px -65px;
+  color: #61dafb;
+  position:absolute;
+}
+
+.buton1 {
+  /* text-align:end; */
+  width: 14px;
+}
+
+.userveri3 {
+  padding:0%;
+  width: 1480px;
+  height: 350px;
+  margin: 410px 1000px 50px -65px;
+  color: #61dafb;
+  position:absolute;
+  text-align: start;
+}
+
+
+.sure {
+  width: 15px;
+  height: 24px;
+  font-size:larger;
+}
+
+.expense {
+  padding:0%;
+  width: 1480px;
+  height: 420px;
+  margin: -145px 1009px 50px -65px;
+  color: #61dafb;
+  position:absolute;
+  text-align: start;
+}
+
+.overtimework{
+  padding:0%;
+  width: 1480px;
+  height: 320px;
+  margin: -145px 1009px 50px -65px;
+  color: #61dafb;
+  position:absolute;
+  text-align: start;
+}
+
+.listeuser{
+  padding:0%;
+  width: 1480px;
+  height: 350px;
+  margin: 410px 1000px 50px -65px;
+  color: #61dafb;
+  position:absolute;
+  text-align: start;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
