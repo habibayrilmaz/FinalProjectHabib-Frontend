@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Paper } from '@mui/material';
+import { useReducer } from 'react';
 
 
 export default function ExpenseList() {
     const [users,setUsers] = React.useState([]);
     const [expense, setExpense] = React.useState([]);
+    const [reducerValue, forceUpdate] = useReducer(x=>x+1,0);
+
 
             React.useEffect(() => {
             const fetchProducts = async () => {
@@ -17,7 +20,7 @@ export default function ExpenseList() {
             console.log(json)
             }
             fetchProducts()
-            }, [])
+            }, [reducerValue])
 
          React.useEffect(() => {
             const fetchProducts = async () => {
@@ -30,8 +33,28 @@ export default function ExpenseList() {
             console.log(json)
             }
             fetchProducts()
-            }, [])
+            }, [reducerValue])
     
+            async function DeleteOperation(id){
+                const fetchProducts = async () => {
+                const response = await fetch('user-expense/'+id,{
+                    method: 'DELETE',
+                    headers: new Headers({
+                        'Accept': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+                        'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS',
+                      }),
+                })
+                console.log(response.ok)
+                console.log(response)
+                if(response.ok){
+                  alert("Silme işleminiz gerçekleştirildi.")
+                  forceUpdate();
+                }
+                }
+                fetchProducts()
+        }        
 
   return (
     
@@ -42,7 +65,7 @@ export default function ExpenseList() {
    </div>
    </div>
 
-                <div className='container p-3 mb-2 bg-light text-dark' >
+                <div className='p-3 mb-2 bg-light text-dark' >
                 <table  className="table table-bordered table-hover ">
                 <caption >Harcamalar Listesi</caption>
                 <thead className="table-dark">
@@ -55,6 +78,7 @@ export default function ExpenseList() {
                     <th scope="col">Vergi Oranı</th>
                     <th scope="col">Fiş Tarihi</th>
                     <th scope="col">Harcama ID</th>
+                    <th></th>
                     </tr>
                 </thead>
                 <tfoot className="table-secondary">
@@ -67,6 +91,7 @@ export default function ExpenseList() {
                     <th scope="col">Vergi Oranı</th>
                     <th scope="col">Fiş Tarihi</th>
                     <th scope="col">Harcama ID</th>
+                    <th></th>
 
 
                 </tr>
@@ -88,6 +113,10 @@ export default function ExpenseList() {
                     <td>{expense.taxRate}</td>
                     <td>{expense.voucherDate}</td>
                     <td>{expense.id}</td>
+                    <td><span onClick={()=> 
+                        DeleteOperation(expense.id)}
+                        style={{"backgroundColor":"red","color":"white","borderRadius":"5px","padding":"5px","cursor":"pointer"}}>Delete</span></td>
+
                     </tr>
                 </tbody> 
                 )})}

@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { Paper } from '@mui/material';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useReducer } from 'react';
 
 
 
 export default function UsersList() {
     const [users,setUsers] = React.useState([]);
 
+    const [reducerValue, forceUpdate] = useReducer(x=>x+1,0);
 
             React.useEffect(() => {
             const fetchProducts = async () => {
@@ -19,10 +21,29 @@ export default function UsersList() {
             console.log(json)
             }
             fetchProducts()
-            }, [])
+            }, [reducerValue])  
 
-
-
+    async function DeleteOperation(id){
+            const fetchProducts = async () => {
+            const response = await fetch('user/'+id,{
+                method: 'DELETE',
+                headers: new Headers({
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+                    'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS',
+                  }),
+            })
+            console.log(response.ok)
+            console.log(response)
+            if(response.ok){
+              alert("Silme işleminiz gerçekleştirildi.")
+              forceUpdate();
+            }
+            }
+            fetchProducts()
+    }        
+    
   return (
     
     <Paper className='p-3 mb-2 bg-dağk text-white' elevation={5} style ={{margin: "-150px 50px 0px 250px" ,position: "relative", textAlign:"center", backgroundColor:"grey"}}>
@@ -32,7 +53,7 @@ export default function UsersList() {
             <h3 className='mb-3' style={{textAlign:"center"}}>Kullanıcı Listesi</h3>
             </div>
             </div>            
-                <div className='container p-3 mb-2 bg-light text-dark' >
+                <div className='p-3 mb-2 bg-light text-dark' >
                 <table  className="table table-bordered table-hover ">
                 <caption >List of users</caption>
                 <thead className="table-dark">
@@ -49,7 +70,7 @@ export default function UsersList() {
                     <th scope="col">Role</th>
                     <th scope="col">Department</th>
                     <th scope="col">Birth Date</th>
-
+                    <th></th>
                     </tr>
                 </thead>
                 <tfoot className="table-secondary">
@@ -66,6 +87,7 @@ export default function UsersList() {
                     <th scope="col">Role</th>
                     <th scope="col">Department</th>
                     <th scope="col">Birth Date</th>
+                    <th></th>
                 </tr>
                 </tfoot>
                 {users.map((user, index) => {
@@ -87,6 +109,9 @@ export default function UsersList() {
                     <td>{user.userRole}</td>
                     <td>{user.userDepartment}</td>
                     <td>{user.userBirthDate}</td>
+                    <td><span onClick={()=> 
+                        DeleteOperation(user.id)}
+                        style={{"backgroundColor":"red","color":"white","borderRadius":"5px","padding":"5px","cursor":"pointer"}}>Delete</span></td>
                     </tr>
                 </tbody> 
                 )})}

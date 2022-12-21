@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { Paper } from '@mui/material';
+import { useReducer } from 'react';
 
 
 export default function AdvertsList() {
 
     const [advert, setAdvert] = React.useState([]);
+    const [reducerValue, forceUpdate] = useReducer(x=>x+1,0);
+
 
             React.useEffect(() => {
                 const fetchProducts = async () => {
@@ -17,7 +20,28 @@ export default function AdvertsList() {
                 console.log(json)
                 }
                 fetchProducts()
-                }, [])
+                }, [reducerValue])
+
+                async function DeleteOperation(id){
+                    const fetchProducts = async () => {
+                    const response = await fetch('advert/'+id,{
+                        method: 'DELETE',
+                        headers: new Headers({
+                            'Accept': 'application/json',
+                            'Access-Control-Allow-Origin': '*',
+                            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+                            'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS',
+                          }),
+                    })
+                    console.log(response.ok)
+                    console.log(response)
+                    if(response.ok){
+                      alert("Silme işleminiz gerçekleştirildi.")
+                      forceUpdate();
+                    }
+                    }
+                    fetchProducts()
+            }        
         
         
     
@@ -32,7 +56,7 @@ export default function AdvertsList() {
    </div>
 
 
-                <div className='container p-3 mb-2 bg-light text-dark' >
+                <div className='p-3 mb-2 bg-light text-dark' >
                 <table  className="table table-bordered table-hover ">
                 <caption >İlan Listesi</caption>
                 <thead className="table-dark">
@@ -43,6 +67,7 @@ export default function AdvertsList() {
                     <th scope="col">Departman</th>
                     <th scope="col">İlan Türü</th>
                     <th scope="col">İlan Açıklaması</th>
+                    <th></th>
                     </tr>
                 </thead>
                 <tfoot className="table-secondary">
@@ -53,6 +78,7 @@ export default function AdvertsList() {
                     <th scope="col">Departman</th>
                     <th scope="col">İlan Türü</th>
                     <th scope="col">İlan Açıklaması</th>
+                    <th></th>
                 </tr>
                 </tfoot>
                 {advert.map((advert, index) => {
@@ -66,6 +92,10 @@ export default function AdvertsList() {
                     <td>{advert.advertDepartment}</td>
                     <td>{advert.advertType}</td>
                     <td>{advert.advertDetail}</td>
+                    <td><span onClick={()=> 
+                        DeleteOperation(advert.id)}
+                        style={{"backgroundColor":"red","color":"white","borderRadius":"5px","padding":"5px","cursor":"pointer"}}>Delete</span></td>
+
                     </tr>
                 </tbody> 
                 )})}

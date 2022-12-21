@@ -19,6 +19,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
+    "cor": "^0.0.0",
+    "cors": "^2.8.5",
     "dayjs": "^1.11.7",
     "jquery": "^3.6.2",
     "match-sorter": "^6.3.1",

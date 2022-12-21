@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Paper } from '@mui/material';
+import { useReducer } from 'react';
 
 
 export default function OverTimeWorkList() {
     const [users,setUsers] = React.useState([]);
     const [overTime, setOverTime] = React.useState([]);
+    const [reducerValue, forceUpdate] = useReducer(x=>x+1,0);
 
             React.useEffect(() => {
             const fetchProducts = async () => {
@@ -17,7 +19,7 @@ export default function OverTimeWorkList() {
             console.log(json)
             }
             fetchProducts()
-            }, [])
+            }, [reducerValue])
 
          React.useEffect(() => {
             const fetchProducts = async () => {
@@ -30,7 +32,28 @@ export default function OverTimeWorkList() {
             console.log(json)
             }
             fetchProducts()
-            }, [])
+            }, [reducerValue])
+
+            async function DeleteOperation(id){
+                const fetchProducts = async () => {
+                const response = await fetch('over-time-work/'+id,{
+                    method: 'DELETE',
+                    headers: new Headers({
+                        'Accept': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+                        'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS',
+                      }),
+                })
+                console.log(response.ok)
+                console.log(response)
+                if(response.ok){
+                  alert("Silme işleminiz gerçekleştirildi.")
+                  forceUpdate();
+                }
+                }
+                fetchProducts()
+        }        
     
 
   return (
@@ -42,7 +65,7 @@ export default function OverTimeWorkList() {
    </div>
    </div>
 
-                <div className='container p-3 mb-2 bg-light text-dark' >
+                <div className='p-3 mb-2 bg-light text-dark' >
                 <table  className="table table-bordered table-hover ">
                 <caption >Mesai Listesi</caption>
                 <thead className="table-dark">
@@ -53,6 +76,7 @@ export default function OverTimeWorkList() {
                     <th scope="col">Mesai Süresi</th>
                     <th scope="col">Açıklama</th>
                     <th scope="col">Mesai ID</th>
+                    <th></th>
 
 
                     </tr>
@@ -65,6 +89,7 @@ export default function OverTimeWorkList() {
                     <th scope="col">Mesai Süresi</th>
                     <th scope="col">Açıklama</th>
                     <th scope="col">Mesai ID</th>
+                    <th></th>
 
 
                 </tr>
@@ -84,6 +109,10 @@ export default function OverTimeWorkList() {
                     <td>{overTime.timeOfOverTimeWork}</td>
                     <td>{overTime.detailOfOverTimeWork}</td>
                     <td>{overTime.id}</td>
+                    <td><span onClick={()=> 
+                        DeleteOperation(overTime.id)}
+                        style={{"backgroundColor":"red","color":"white","borderRadius":"5px","padding":"5px","cursor":"pointer"}}>Delete</span></td>
+
                     </tr>
                 </tbody> 
                 )})}
