@@ -14,7 +14,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import Cirsh from '../components/images/logo2.png';
 import {SIDE_BAR} from '../enums'
 
-import {Link} from '@mui/material'
+
 
 
 
@@ -52,15 +52,15 @@ export default function Sidebar() {
         <List >
           {SIDE_BAR.map((item, index) => (
             <ListItem  key={item.displayName} disablePadding>
-       
+
               <ListItemButton component="a" href={item.route} >
-                
+
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
-                <Link href={item.route} variant="inherit" color="inherit" underline='none'>
+
                   <ListItemText primary={item.displayName} />
-                </Link>
+
               </ListItemButton>
             </ListItem>
             
