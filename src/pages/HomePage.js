@@ -5,7 +5,7 @@ export const HomePage = () => {
 
     return (
         <div>
-            Anasayfaya sdgsdgdhHoşgeldiniz
+            Anasayfaya Hoşgeldiniz
         </div>
     )
 
